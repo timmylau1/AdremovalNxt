@@ -1,0 +1,56 @@
+[Plugin]
+#!name=知乎去广告（更新版）
+#!desc=移除知乎应用广告，拦截日志追踪、A/B测试配置、地理位置上报等广告相关请求
+#!author=RuCu6, blackmatrix7, timmy
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Zhihu.png
+#!date=2024-03-20
+
+# ========== 核心广告拦截规则 ==========
+[Rule]
+# 知乎原生广告域名
+DOMAIN,appcloud.zhihu.com,REJECT
+DOMAIN,appcloud2.in.zhihu.com,REJECT
+DOMAIN,crash2.zhihu.com,REJECT
+DOMAIN,mqtt.zhihu.com,REJECT
+
+# 新增发现的广告追踪服务器 ▼
+DOMAIN,toblog.volceapplog.com,REJECT
+DOMAIN,abtest.volceapplog.com,REJECT
+DOMAIN-SUFFIX,volceapplog.com,REJECT
+DOMAIN,pv.sohu.com,REJECT
+DOMAIN,cnlogs.umengcloud.com,REJECT
+
+# IPv4/IPv6黑名单（根据抓包补充）
+IP-CIDR,103.41.167.237/32,REJECT,no-resolve
+IP-CIDR6,2402:4e00:1200:ed00:0:9089:6dac:96b6/128,REJECT,no-resolve
+
+# ========== 高级请求重写 ==========
+[Rewrite]
+# 拦截知乎原生广告API
+^https:\/\/api\.zhihu\.com\/commercial_api\/ reject-dict
+^https:\/\/api\.zhihu\.com\/ad-style-service\/request reject-dict
+
+# 新增广告追踪接口拦截 ▼
+^https:\/\/toblog\.volceapplog\.com\/service/2/(app_log|log_settings)/ reject
+^https:\/\/abtest\.volceapplog\.com\/service/2/abtest_config/ reject-dict
+^https:\/\/cnlogs\.umengcloud\.com\/unify_logs reject
+
+# 屏蔽地理位置上报（可能导致部分功能异常）
+^https:\/\/pv\.sohu\.com\/cityjson reject
+
+# ========== 动态脚本处理 ==========
+[Script]
+# 原有脚本（保持核心功能）
+http-response ^https:\/\/api\.zhihu\.com\/feed\/render\/tab\/config\? script-path=Zhihu_remove_ads.js,tag=信息流广告拦截
+
+# 新增A/B测试配置拦截 ▼
+http-response ^https:\/\/abtest\.volceapplog\.com\/service/2/abtest_config/ script-path=Zhihu_remove_ads.js,requires-body=true,tag=广告策略拦截
+
+# ========== 中间人解密配置 ==========
+[MitM]
+# 必须解密的域名
+hostname= 
+*.zhihu.com,
+*.volceapplog.com,
+*.umengcloud.com,
+pv.sohu.com
