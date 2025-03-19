@@ -59,8 +59,4 @@ http-response ^https:\/\/abtest\.volceapplog\.com\/service/2/abtest_config/ scri
 # ========== 中间人解密配置 ==========
 [MitM]
 # 必须解密的域名
-hostname= 
-*.zhihu.com,
-*.volceapplog.com,
-*.umengcloud.com,
-pv.sohu.com
+hostname = *.zhihu.com, *.volceapplog.com, *.umengcloud.com, pv.sohu.com
