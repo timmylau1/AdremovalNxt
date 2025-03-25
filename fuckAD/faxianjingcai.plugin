@@ -9,12 +9,15 @@
 [Rule]
 # 拦截静态广告域名
 DOMAIN,static.95508.com,REJECT
-DOMAIN-SUFFIX,95508.com
-DOMAIN-SUFFIX,cgbchina.cn
-DOMAIN-SUFFIX,cgbchina.com.cn
-DOMAIN-SUFFIX,gdb.com.cn
+DOMAIN-SUFFIX,95508.com,REJECT
+DOMAIN-SUFFIX,cgbchina.cn,REJECT
+DOMAIN-SUFFIX,cgbchina.com.cn,REJECT
+DOMAIN-SUFFIX,gdb.com.cn,REJECT
+#精准拦截
 URL-REGEX,^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/.*\.(jpg|png|webp),REJECT
 
+
+# 重写规则（清除广告占位符）
 [Rewrite]
 ^https:\/\/static\.95508\.com\/mmg\/images\/ads\/.*\.(jpg|png|webp) reject
 
