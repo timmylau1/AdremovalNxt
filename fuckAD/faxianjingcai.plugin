@@ -1,19 +1,20 @@
 [Plugin]
-#!name=广发银行APP去广告（测试）
-#!desc=拦截广发银行APP静态广告图片
+#!name=广发银行APP去广告（精准版）
+#!desc=精准拦截广告图片，避免误杀UI素材
 #!author=timmy
 #!icon=https://example.com/icon.png
 #!date=2025-03-25
 
 # ========== 核心广告拦截规则 ==========
 [Rule]
-#精准拦截
-URL-REGEX,^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/.*\.(jpg|png|webp),REJECT
+# 更精准的广告路径匹配（严格限定广告目录层级）
+URL-REGEX,^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/[^\/]+\/.*\.(jpg|png|webp)$,REJECT
 
-
-# 重写规则（清除广告占位符）
+# ========== 重写规则 ==========
 [Rewrite]
-^https:\/\/static\.95508\.com\/mmg\/images\/ads\/.*\.(jpg|png|webp) reject
+# 仅拦截广告目录，排除其他类似路径
+^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/\d{8}\/.*\.(jpg|png|webp)$ reject
 
+# ========== 中间人解密配置 ==========
 [MitM]
 hostname = static.95508.com
