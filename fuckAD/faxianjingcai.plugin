@@ -13,12 +13,10 @@ DOMAIN-SUFFIX,95508.com
 DOMAIN-SUFFIX,cgbchina.cn
 DOMAIN-SUFFIX,cgbchina.com.cn
 DOMAIN-SUFFIX,gdb.com.cn
+URL-REGEX,^https?:\/\/static\.95508\.com\/mmg\/images\/ads\/.*\.(jpg|png|webp),REJECT
 
-# ========== 高级请求重写 ==========
 [Rewrite]
-# 精确匹配广告图片路径
 ^https:\/\/static\.95508\.com\/mmg\/images\/ads\/.*\.(jpg|png|webp) reject
 
-# ========== 中间人解密配置 ==========
 [MitM]
-hostname = *.95508.com
+hostname = static.95508.com
