@@ -163,7 +163,10 @@ DOMAIN,adx.halomobi.com,REJECT
 # 核心拦截
 DOMAIN,mobile.ximalaya.com,REJECT
 URL-REGEX,^https?://mobile\.ximalaya\.com/discovery-firstpage/.*$,REJECT
-URL-REGEX,^https?://mobile\.ximalaya\.com/business-vip.*$,REJECT
+# 信息流广告拦截
+URL-REGEX,^https?://mobile\.ximalaya\.com/discovery-(firstpage|category)/.*$,REJECT
+# 商业推广拦截
+DOMAIN,business-vip-aggregation-channel-web.ximalaya.com,REJECT
 # 追踪防护
 DOMAIN-KEYWORD,idfa,REJECT
 DOMAIN-KEYWORD,volceapplog,REJECT
