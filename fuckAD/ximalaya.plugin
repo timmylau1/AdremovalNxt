@@ -220,7 +220,8 @@ DOMAIN-KEYWORD,volceapplog,REJECT
 ^https:\/\/t-dsp\.pinduoduo\.com\/dspcb\/i\/mrk_union reject
 ^https:\/\/images\.pinduoduo\.com\/mrk\/ reject
 ^https:\/\/images\.pinduoduo\.com\/marketing_api\/ reject
-
+^https?:\/\/img2\.360buyimg\.com:443\/ reject
+^https?:\/\/img2\.360buyimg\.com\/ reject
 
 
 [Script]
@@ -229,4 +230,4 @@ http-response ^https?://(?:mobile|adse)\.ximalaya\.com/.* script-path=https://gi
 
 
 [MitM]
-hostname=gslbali.ximalaya.com,search.ximalaya.com,searchwsa.ximalaya.com,mobile.ximalaya.com,mobilehera.ximalaya.com,mobwsa.ximalaya.com,m.ximalaya.com,mwsa.ximalaya.com,video-dsp.pddpic.com,t-dsp.pinduoduo.com,images.pinduoduo.com,*.ximalaya.com, *.volceapplog.com
+hostname=gslbali.ximalaya.com,search.ximalaya.com,searchwsa.ximalaya.com,mobile.ximalaya.com,mobilehera.ximalaya.com,mobwsa.ximalaya.com,m.ximalaya.com,mwsa.ximalaya.com,video-dsp.pddpic.com,t-dsp.pinduoduo.com,images.pinduoduo.com,*.ximalaya.com,*.volceapplog.com,img2.360buyimg.com
